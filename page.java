@@ -83,8 +83,10 @@ public class page {
         submitButton.setFont(new Font("Arial", Font.BOLD, 20)); 
         submitButton.setBackground(Color.decode("#1D2D44")); 
         submitButton.setForeground(Color.WHITE); 
+        submitButton.setFocusPainted(false);
+        submitButton.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         panel.add(submitButton, gbc);
-
+        
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,30 +118,64 @@ public class page {
                 if (valid) {
                     System.out.println(inputData.toString());
                     if (func.equals("AddCourse")) {
-                        university.addCourse(new Course(textFields[0].getText(), textFields[1].getText(), Integer.parseInt(textFields[2].getText())));
+                        int a = university.addCourse(new Course(textFields[0].getText(), textFields[1].getText(), Integer.parseInt(textFields[2].getText())));
+                        if(a == -1){
+                            JOptionPane.showMessageDialog(frame, "Course already exists", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     } else if (func.equals("AddTeacher")) {
-                        university.addTeacher(new Teacher(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), textFields[3].getText(), textFields[4].getText()));
+                        int a = university.addTeacher(new Teacher(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), textFields[3].getText(), textFields[4].getText()));
+                        if(a == -1){
+                            JOptionPane.showMessageDialog(frame, "Teacher already exists", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     } else if (func.equals("AddStudent")) {
-                        university.addStudent(new Student(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), textFields[3].getText(), textFields[4].getText()));
+                        int a = university.addStudent(new Student(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), textFields[3].getText(), textFields[4].getText()));
+                        if(a == -1){
+                            JOptionPane.showMessageDialog(frame, "Student already exists", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     } 
 
                     else if (  func.equals("AssignTeacherToCourse") || func.equals("AssignCourseToTeacher")) 
-                      {  university.assignTeacherToCourse(textFields[0].getText(), textFields[1].getText());
+                      {  int a = university.assignTeacherToCourse(textFields[0].getText(), textFields[1].getText());
+                        if(a == -1){
+                            JOptionPane.showMessageDialog(frame, "Teacher or Course does not exist", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else if(a == 1){
+                            JOptionPane.showMessageDialog(frame, "Teacher is already assigned to the course", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    
                     }
                    else if (func.equals("EnrollStudentInCourse")) {
-                      university.enrollStudentInCourse(textFields[0].getText(), textFields[1].getText());
+                      int a = university.enrollStudentInCourse(textFields[0].getText(), textFields[1].getText());
+                      if(a == -1){
+                        JOptionPane.showMessageDialog(frame, "Student or Course does not exist", "Input Error", JOptionPane.ERROR_MESSAGE);
+                      }
+                      else if(a == 1){
+                        JOptionPane.showMessageDialog(frame, "Student is already enrolled in the course", "Input Error", JOptionPane.ERROR_MESSAGE);
+                      }
                     }
 
-                    // else if (func.equals("EnrollStudentInCourse") {
-                    //     university.removeStudentFromCourse(textFields[0].getText(), textFields[1].getText());
-                    // }
-                    // else if (func.equals("RemoveStudentFromCourse")) {
-                    //     university.calculateAverageGrade(textFields[0].getText());
-                    // }
+                    else if (func.equals("RemoveStudentFromCourse")) {
+                        int a =university.removeStudentFromCourse(textFields[0].getText(), textFields[1].getText());
+                        if(a == -1){
+                            JOptionPane.showMessageDialog(frame, "Student or Course does not exist", "Input Error", JOptionPane.ERROR_MESSAGE);
+                          }
+                        else if(a == 1){
+                            JOptionPane.showMessageDialog(frame, "Student is not enrolled in the course", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    
                     //  else if (func.equals("AssignGradeToStudent")) {
                     //     university.assignGradeToStudent(textFields[0].getText(),textFields[1].getText(), Integer.parseInt(textFields[2].getText()));
                     // }
+                    // else if (func.equals("CalculateAverageGrade")) {
+                    //     university.calculateAverageGrade(textFields[0].getText());
+                    // }
                 university.saveData(null);
+                //empty the textfields
+                for (int i = 0; i < labels.length; i++) {
+                    textFields[i].setText("");
+                }
+                
             }
         }
         });
@@ -159,8 +195,14 @@ public class page {
         JButton teachersReportButton = new JButton("Teachers Report");
 
         studentsReportButton.setFont(new Font("Arial", Font.BOLD, 20));
+        studentsReportButton.setFocusPainted(false);
+        studentsReportButton.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         coursesReportButton.setFont(new Font("Arial", Font.BOLD, 20));
+        coursesReportButton.setFocusPainted(false);
+        coursesReportButton.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         teachersReportButton.setFont(new Font("Arial", Font.BOLD, 20));
+        teachersReportButton.setFocusPainted(false);
+        teachersReportButton.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         gbc.gridx = 0;
         gbc.gridy = 0;

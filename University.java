@@ -54,6 +54,7 @@ public class University {
         List<Student> st=students.getAll();
         for(Student stud:st){
             if(stud.getStudentID().equals(student.getStudentID())){
+                //already exists 
                 return -1;
             }
         }
@@ -81,6 +82,7 @@ public class University {
             List<Teacher> t=teachers.getAll();
             for(Teacher teach:t){
                 if(teach.getTeacherID().equals(teacher.getTeacherID())){
+                    //already exists
                     return -1;
                 }
             }
@@ -94,6 +96,7 @@ public class University {
         List<Course> crs=courses.getAll();
         for(Course cr:crs){
             if(cr.getCourseID().equals(course.getCourseID())){
+                // -1 if the course already exists in the list
                 return -1;
             }
         }
@@ -153,39 +156,51 @@ public class University {
             }
         }
         return null;
-    }
+        }
 
-    public void assignTeacherToCourse(String teacherID, String courseID) {
+        public int assignTeacherToCourse(String teacherID, String courseID) {
+        // Find the teacher and course by their IDs
         Teacher teacher = searchTeacherByID(teacherID);
         Course course = searchCourseByID(courseID);
-        if (teacher != null && course != null) {
-            course.setAssignedTeacher(teacher);
-        }
-    }
 
-    public int enrollStudentInCourse(String studentID, String courseID) {
+        // Return -1 if either the teacher or course is not found
+        if (teacher == null || course == null) {
+            return -1; // Teacher or course does not exist
+        }
+
+        // Check if the course already has an assigned teacher
+        if (course.getAssignedTeacher() != null) {
+            return 1; // Course already has an assigned teacher
+        }
+
+        // Assign the teacher to the course
+        course.setAssignedTeacher(teacher);
+        return 0; // Assignment successful
+        }
+
+        public int enrollStudentInCourse(String studentID, String courseID) {
         // Find the student and course by their IDs
         Student student = searchStudentByID(studentID);
         Course course = searchCourseByID(courseID);
-    
+
         // Return -1 if either the student or course is not found
         if (student == null || course == null) {
             return -1; // Student or course does not exist
         }
-        //highly unlikely
+
         // Check if the student is already enrolled in the course
         for (Student s : course.getEnrolledStudents()) {
             if (s.getStudentID().equals(studentID)) {
-                return 1; // Student already enrolled
+            return 1; // Student already enrolled
             }
         }
-    
+
         // Enroll the student in the course
         course.addStudent(student); // Assuming addStudent handles the addition
         return 0; // Enrollment successful
-    }
+        }
 
-    public void assignGradeToStudent(String studentID, String courseID, int grade) {
+        public void assignGradeToStudent(String studentID, String courseID, int grade) {
         grade=(Integer)grade;
         Student student = searchStudentByID(studentID);
         Course course = searchCourseByID(courseID);
@@ -194,12 +209,32 @@ public class University {
         }
     }
 
-    public void removeStudentFromCourse(String studentID, String courseID) {
+    public int removeStudentFromCourse(String studentID, String courseID) {
+        // Find the student and course by their IDs
         Student student = searchStudentByID(studentID);
         Course course = searchCourseByID(courseID);
-        if (student != null && course != null) {
-            course.removeStudent(student);
+    
+        // Return -1 if either the student or course is not found
+        if (student == null || course == null) {
+            return -1; // Student or course does not exist
         }
+    
+        // Check if the student is enrolled in the course
+        boolean isEnrolled = false;
+        for (Student s : course.getEnrolledStudents()) {
+            if (s.getStudentID().equals(studentID)) {
+                isEnrolled = true;
+                break;
+            }
+        }
+    
+        if (!isEnrolled) {
+            return 1; // Student not enrolled in the course
+        }
+    
+        // Remove the student from the course
+        course.removeStudent(student); // Assuming removeStudent handles the removal
+        return 0; // Removal successful
     }
 
     public List<Course> filterCoursesByTeacher(String teacherID) {
