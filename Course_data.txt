@@ -1,7 +1,7 @@
 C1002 Science 4
 T1002 Eve sdf 1980-01-02 456 
 S1001 Alice abc@gmail.com 2000-01-01 123 
-Grades: 45 
+Grades: 60 
 
 C1001 Math 3
 T1001 David @gmailc.com 1980-01-01 123 
