@@ -172,7 +172,7 @@ public class University {
         if (student == null || course == null) {
             return -1; // Student or course does not exist
         }
-    
+        //highly unlikely
         // Check if the student is already enrolled in the course
         for (Student s : course.getEnrolledStudents()) {
             if (s.getStudentID().equals(studentID)) {
