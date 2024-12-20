@@ -84,12 +84,12 @@ public class Course {
 
     
     public void assignGrade(Student s, Integer grade) {
-        int index = enrolledStudents.indexOf(s);
-        if (index != -1) {
-            grades.set(index, grade);
-            System.out.println("Grade " + grade + " assigned to " + s.getStudentID() + " for " + title);
-        } else {
-            System.out.println(s.getStudentID() + " is not enrolled in " + title);
+        for (int i = 0; i < enrolledStudents.size(); i++) {
+            if (enrolledStudents.get(i).getStudentID().equals(s.getStudentID())) {
+                grades.set(i, grade);
+                System.out.println("Grade " + grade + " assigned to " + s.getStudentID() + " in " + title);
+                return;
+            }
         }
     }
 
