@@ -29,15 +29,15 @@ public class page {
 
         frame.add(headerPanel, BorderLayout.NORTH);
 
-        mainPanel.add(createFormPanel(new String[]{"Course ID (C001)","Course Title",  "Course Credits"}, new String[]{"courseId","string", "int"},"AddCourse"), "AddCourse");
-        mainPanel.add(createFormPanel(new String[]{"Teacher ID (T001)", "Course ID (C001)"}, new String[]{"teacherId", "courseId"}, "AssignTeacherToCourse"), "AssignTeacherToCourse");
-        mainPanel.add(createFormPanel(new String[]{"Student ID (S001)", "Course ID (C001)"}, new String[]{"studentId", "courseId"}, "EnrollStudentInCourse"), "EnrollStudentInCourse");
-        mainPanel.add(createFormPanel(new String[]{"Student ID (S001)", "Course ID (C001)"}, new String[]{"studentId", "courseId"}, "RemoveStudentFromCourse"), "RemoveStudentFromCourse");
-        mainPanel.add(createFormPanel(new String[]{"Course ID (C001)"}, new String[]{"courseId"}, "CalculateAverageGrade"), "CalculateAverageGrade");
-        mainPanel.add(createFormPanel(new String[]{"Teacher ID (T001)", "Teacher Name", "Email (example@gmail.com)", "DOB (DD-MM-YYYY)", "Specialization"}, new String[]{"teacherId", "string", "email", "dob", "string"}, "AddTeacher"), "AddTeacher");
-        mainPanel.add(createFormPanel(new String[]{"Teacher ID (T001)", "Course ID (C001)"}, new String[]{"teacherId", "courseId"}, "AssignCourseToTeacher"), "AssignCourseToTeacher");
-        mainPanel.add(createFormPanel(new String[]{"Student ID (S001)", "Student Name", "Email (example@gmail.com)", "DOB (DD-MM-YYYY)", "Address"}, new String[]{"studentId", "string", "email", "dob", "alnum"}, "AddStudent"), "AddStudent");
-        mainPanel.add(createFormPanel(new String[]{"Student ID (S001)","Course ID (C001)", "Grade"}, new String[]{"studentId","courseId", "int"}, "AssignGradeToStudent"), "AssignGradeToStudent");
+        mainPanel.add(createFormPanel(new String[]{"Course ID","Course Title",  "Course Credits"}, new String[]{"courseId","string", "int"},"AddCourse",new String[]{"i.e, C001","i.e, Maths","i.e, 3"}), "AddCourse");
+        mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignTeacherToCourse", new String[]{"i.e, T001","i.e, C001"}), "AssignTeacherToCourse");
+        mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "EnrollStudentInCourse", new String[]{"i.e, S001","i.e, C001"}), "EnrollStudentInCourse");
+        mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "RemoveStudentFromCourse", new String[]{"i.e, S001","i.e, C001"}), "RemoveStudentFromCourse");
+        mainPanel.add(createFormPanel(new String[]{"Course ID"}, new String[]{"courseId"}, "CalculateAverageGrade", new String[]{"i.e, C001"}), "CalculateAverageGrade");
+        mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Teacher Name", "Email", "DOB", "Specialization"}, new String[]{"teacherId", "string", "email", "dob", "string"}, "AddTeacher", new String[]{"i.e, T001","i.e, John","i.e, example@gmail.com","i.e, 01-01-1990","i.e, Mathematics"}), "AddTeacher");
+        mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignCourseToTeacher", new String[]{"i.e, T001","i.e, C001"}), "AssignCourseToTeacher");
+        mainPanel.add(createFormPanel(new String[]{"Student ID", "Student Name", "Email", "DOB", "Address"}, new String[]{"studentId", "string", "email", "dob", "alnum"}, "AddStudent", new String[]{"i.e, S001","i.e, Jane","i.e, example@gmail.com","i.e, 11-01-2000","i.e, 123 Main St"}), "AddStudent");
+        mainPanel.add(createFormPanel(new String[]{"Student ID","Course ID", "Grade"}, new String[]{"studentId","courseId", "int"}, "AssignGradeToStudent", new String[]{"i.e, S001","i.e, C001","i.e, 90"}), "AssignGradeToStudent");
         mainPanel.add(createReportPanel(), "GenerateReport");
         frame.add(mainPanel, BorderLayout.CENTER);
 
@@ -46,7 +46,7 @@ public class page {
         frame.setVisible(true);
     }
 
-    private JPanel createFormPanel(String[] labels, String[] types,String func) {
+    private JPanel createFormPanel(String[] labels, String[] types,String func,String[] format) {
         JPanel panel = new JPanel(new GridBagLayout());
         panel.setBackground(Color.decode("#F0EBD8")); 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -63,6 +63,26 @@ public class page {
             JTextField textField = new JTextField(15); 
             textField.setPreferredSize(new Dimension(150, 30)); 
             textFields[i] = textField;
+            // set text of textfield to the format
+            textField.setFont(new Font("Arial", Font.PLAIN, 20));
+            textField.setForeground(Color.GRAY);
+            textField.setText(format[i]);
+            final int index = i;
+            textField.addFocusListener(new java.awt.event.FocusAdapter() {
+                public void focusGained(java.awt.event.FocusEvent evt) {
+                    if (textField.getText().equals(format[index])) {
+                        textField.setText("");
+                        textField.setForeground(Color.BLACK);
+                    }
+                }            
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    if (textField.getText().isEmpty()) {
+                        textField.setForeground(Color.GRAY);
+                        textField.setText(format[index]);
+                    }
+                }
+            });
+
 
             gbc.gridx = 0;
             gbc.gridy = i;
