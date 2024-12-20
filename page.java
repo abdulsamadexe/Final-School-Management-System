@@ -29,15 +29,15 @@ public class page {
 
         frame.add(headerPanel, BorderLayout.NORTH);
 
-        mainPanel.add(createFormPanel(new String[]{"Course ID","Course Title",  "Course Credits"}, new String[]{"courseId","string", "int"},"AddCourse"), "AddCourse");
-        mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignTeacherToCourse"), "AssignTeacherToCourse");
-        mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "EnrollStudentInCourse"), "EnrollStudentInCourse");
-        mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "RemoveStudentFromCourse"), "RemoveStudentFromCourse");
-        mainPanel.add(createFormPanel(new String[]{"Course ID"}, new String[]{"courseId"}, "CalculateAverageGrade"), "CalculateAverageGrade");
-        mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Teacher Name", "Email", "DOB", "Specialization"}, new String[]{"teacherId", "string", "email", "dob", "string"}, "AddTeacher"), "AddTeacher");
-        mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignCourseToTeacher"), "AssignCourseToTeacher");
-        mainPanel.add(createFormPanel(new String[]{"Student ID", "Student Name", "Email", "DOB", "Address"}, new String[]{"studentId", "string", "email", "dob", "string"}, "AddStudent"), "AddStudent");
-        mainPanel.add(createFormPanel(new String[]{"Student ID","Course ID", "Grade"}, new String[]{"studentId","courseId", "int"}, "AssignGradeToStudent"), "AssignGradeToStudent");
+        mainPanel.add(createFormPanel(new String[]{"Course ID (C001)","Course Title",  "Course Credits"}, new String[]{"courseId","string", "int"},"AddCourse"), "AddCourse");
+        mainPanel.add(createFormPanel(new String[]{"Teacher ID (T001)", "Course ID (C001)"}, new String[]{"teacherId", "courseId"}, "AssignTeacherToCourse"), "AssignTeacherToCourse");
+        mainPanel.add(createFormPanel(new String[]{"Student ID (S001)", "Course ID (C001)"}, new String[]{"studentId", "courseId"}, "EnrollStudentInCourse"), "EnrollStudentInCourse");
+        mainPanel.add(createFormPanel(new String[]{"Student ID (S001)", "Course ID (C001)"}, new String[]{"studentId", "courseId"}, "RemoveStudentFromCourse"), "RemoveStudentFromCourse");
+        mainPanel.add(createFormPanel(new String[]{"Course ID (C001)"}, new String[]{"courseId"}, "CalculateAverageGrade"), "CalculateAverageGrade");
+        mainPanel.add(createFormPanel(new String[]{"Teacher ID (T001)", "Teacher Name", "Email (example@gmail.com)", "DOB (DD-MM-YYYY)", "Specialization"}, new String[]{"teacherId", "string", "email", "dob", "string"}, "AddTeacher"), "AddTeacher");
+        mainPanel.add(createFormPanel(new String[]{"Teacher ID (T001)", "Course ID (C001)"}, new String[]{"teacherId", "courseId"}, "AssignCourseToTeacher"), "AssignCourseToTeacher");
+        mainPanel.add(createFormPanel(new String[]{"Student ID (S001)", "Student Name", "Email (example@gmail.com)", "DOB (DD-MM-YYYY)", "Address"}, new String[]{"studentId", "string", "email", "dob", "alnum"}, "AddStudent"), "AddStudent");
+        mainPanel.add(createFormPanel(new String[]{"Student ID (S001)","Course ID (C001)", "Grade"}, new String[]{"studentId","courseId", "int"}, "AssignGradeToStudent"), "AssignGradeToStudent");
         mainPanel.add(createReportPanel(), "GenerateReport");
         frame.add(mainPanel, BorderLayout.CENTER);
 
@@ -323,7 +323,9 @@ public class page {
             case "int":
                 return input.matches("\\d+"); 
             case "string":
-                return input.matches("[a-zA-Z ]+"); 
+                return input.matches("[a-zA-Z ]+");
+            case "alnum":
+                return input.matches("[a-zA-Z0-9 ]+");
             default:
                 return false;
         }
