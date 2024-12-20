@@ -163,18 +163,26 @@ public class University {
         }
     }
 
-    public void enrollStudentInCourse(String studentID, String courseID) {
+    public int enrollStudentInCourse(String studentID, String courseID) {
+        // Find the student and course by their IDs
         Student student = searchStudentByID(studentID);
         Course course = searchCourseByID(courseID);
-
-        if (student != null && course != null) {
-            for(Student s:course.getEnrolledStudents()){
-                if(s.getStudentID().equals(studentID)){
-                    return;
-                }
-            }
-            course.addStudent(student);
+    
+        // Return -1 if either the student or course is not found
+        if (student == null || course == null) {
+            return -1; // Student or course does not exist
         }
+    
+        // Check if the student is already enrolled in the course
+        for (Student s : course.getEnrolledStudents()) {
+            if (s.getStudentID().equals(studentID)) {
+                return 1; // Student already enrolled
+            }
+        }
+    
+        // Enroll the student in the course
+        course.addStudent(student); // Assuming addStudent handles the addition
+        return 0; // Enrollment successful
     }
 
     public void assignGradeToStudent(String studentID, String courseID, int grade) {

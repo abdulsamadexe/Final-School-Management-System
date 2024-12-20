@@ -4,3 +4,9 @@ C1002 Science 4
 T1001 David @gmailc.com 1980-01-01 123 
 C1001 Math 3 
 
+T031 adan a@gmail.com 12-03-2021 phy 
+C13454 java 3 
+
+T021 adan a@gmail.com 12-03-2021 phy 
+C054 jala 3 
+
