@@ -17,8 +17,8 @@ public class SchoolManagementSystem {
 
         
         // university.assignTeacherToCourse("T021", "C054");
-        university.enrollStudentInCourse("S1003", "C1002");
-        // university.assignGradeToStudent("S1003", "C1001", 45);
+        // university.enrollStudentInCourse("S1003", "C1002");
+        university.assignGradeToStudent("S1003", "C1001", 45);
         // university.addStudent(student3);
         // university.addStudent(student2);
         // university.addStudent(student1);

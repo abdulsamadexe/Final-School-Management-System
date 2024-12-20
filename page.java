@@ -216,9 +216,9 @@ public class page {
         gbc.gridy = 2;
         panel.add(teachersReportButton, gbc);
 
-        studentsReportButton.addActionListener(e -> showStudentsReport());
-        coursesReportButton.addActionListener(e -> showCoursesReport());
-        teachersReportButton.addActionListener(e -> showTeachersReport());
+        studentsReportButton.addActionListener(_ -> showStudentsReport());
+        coursesReportButton.addActionListener(_ -> showCoursesReport());
+        teachersReportButton.addActionListener(_ -> showTeachersReport());
 
         return panel;
     }
@@ -387,16 +387,16 @@ public class page {
 
         frame.setJMenuBar(menuBar);
 
-        addCourse.addActionListener(e -> showPanel("AddCourse", "Add Course"));
-        assignTeacherToCourse.addActionListener(e -> showPanel("AssignTeacherToCourse", "Assign Teacher to Course"));
-        enrollStudentInCourse.addActionListener(e -> showPanel("EnrollStudentInCourse", "Enroll Student in Course"));
-        removeStudentFromCourse.addActionListener(e -> showPanel("RemoveStudentFromCourse", "Remove Student from Course"));
-        calculateAverageGrade.addActionListener(e -> showPanel("CalculateAverageGrade", "Calculate Average Grade"));
-        addTeacher.addActionListener(e -> showPanel("AddTeacher", "Add Teacher"));
-        assignCourseToTeacher.addActionListener(e -> showPanel("AssignCourseToTeacher", "Assign Course to Teacher"));
-        addStudent.addActionListener(e -> showPanel("AddStudent", "Add Student"));
-        assignGradeToStudent.addActionListener(e -> showPanel("AssignGradeToStudent", "Assign Grade to Student"));
-        addStaff.addActionListener(e -> showPanel("GenerateReport", "Generate Report"));
+        addCourse.addActionListener(_ -> showPanel("AddCourse", "Add Course"));
+        assignTeacherToCourse.addActionListener(_ -> showPanel("AssignTeacherToCourse", "Assign Teacher to Course"));
+        enrollStudentInCourse.addActionListener(_ -> showPanel("EnrollStudentInCourse", "Enroll Student in Course"));
+        removeStudentFromCourse.addActionListener(_ -> showPanel("RemoveStudentFromCourse", "Remove Student from Course"));
+        calculateAverageGrade.addActionListener(_ -> showPanel("CalculateAverageGrade", "Calculate Average Grade"));
+        addTeacher.addActionListener(_ -> showPanel("AddTeacher", "Add Teacher"));
+        assignCourseToTeacher.addActionListener(_ -> showPanel("AssignCourseToTeacher", "Assign Course to Teacher"));
+        addStudent.addActionListener(_ -> showPanel("AddStudent", "Add Student"));
+        assignGradeToStudent.addActionListener(_ -> showPanel("AssignGradeToStudent", "Assign Grade to Student"));
+        addStaff.addActionListener(_ -> showPanel("GenerateReport", "Generate Report"));
     }
 
     private void showPanel(String panelName, String labelText) {
