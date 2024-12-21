@@ -23,15 +23,15 @@ public class AdministrativeStaff extends Person implements Reportable {
         return department;
     }
 
-    public String generateReport(){
-        System.out.println("Generating report");
-        return "Report generated";
-    }
+   public String generateReport(){
+        return "";
+   }
     public String generateReport(List<Person> people) {
         StringBuilder report = new StringBuilder();
         for (Person person : people) {
             report.append(person.displayDetails()).append("\n");
         }
+        report.append("Total number of people: ").append(people.size());
         return report.toString();
     }
 

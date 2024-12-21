@@ -106,8 +106,29 @@ public class Course {
         return sum / count;
     }
     //toString method
-    public String toString() {
-        return title;  // You can modify this to show more information if needed
+    public String displayDetails()
+     {
+        String str = "Course ID: " + courseID + ", Title: " + title + ", Credits: " + credits + ", Teacher: ";
+        if (assignedTeacher != null) {
+            str += assignedTeacher.getName();
+        } else {
+            str += "None";
+        }
+        str += ", Enrolled Students: ";
+        if (enrolledStudents.size() == 0) {
+            str += "None";
+        } else {
+            for (int i = 0; i < enrolledStudents.size(); i++) {
+                str+= enrolledStudents.get(i).getStudentID();
+                str += enrolledStudents.get(i).getName();
+
+                if (i != enrolledStudents.size() - 1) {
+                    str += ", ";
+                }
+            }
+        }
+
+        return str;
     }
     
 }
