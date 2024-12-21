@@ -5,7 +5,7 @@ public class SchoolManagementSystem {
         University university = new University();
         university.loadData("data.txt");
 
-        university.assignGradeToStudent("S1001", "C1002", 60);
+        university.assignGradeToStudent("S1001", "C1001", 60);
         
 
         university.saveData("data.txt");

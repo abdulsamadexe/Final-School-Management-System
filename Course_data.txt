@@ -7,5 +7,5 @@ C1001 Math 3
 T1001 David @gmailc.com 1980-01-01 123 
 S1001 Alice abc@gmail.com 2000-01-01 123 
 S1002 Bob dsa 2000-01-02 456 
-Grades: -1 -1 
+Grades: 60 -1 
 
