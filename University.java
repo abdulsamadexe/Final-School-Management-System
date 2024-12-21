@@ -125,6 +125,23 @@ public class University {
         }
         return result;
     }
+
+    public List<Course> displayStudentCourses(String studentID) {
+        Student student = searchStudentByID(studentID);
+        if (student == null) {
+            return null;
+        }
+        return student.displayCourses();
+    }
+    
+    public List<Course> displayTeacherCourses(String teacherID) {
+        Teacher teacher = searchTeacherByID(teacherID);
+        if (teacher == null) {
+            return null;
+        }
+        return teacher.displayCourses();
+    }
+    
     
 
     public Teacher searchTeacherByID(String teacherID) {

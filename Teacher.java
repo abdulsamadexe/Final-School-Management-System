@@ -33,11 +33,12 @@ public class Teacher extends Person implements Reportable {
         System.out.println("Teacher " + teacherID + " assigned to teach " + course.getTitle());
     }
 
-    public void displayCourses() {
+    public List<Course> displayCourses() {
         System.out.println("Courses taught by " + name + ":");
         for (Course course : coursesTaught) {
             System.out.println(course.getTitle() + " (" + course.getCourseID() + ")");
         }
+        return coursesTaught;
     }
     @Override
     public void exportToFile() {

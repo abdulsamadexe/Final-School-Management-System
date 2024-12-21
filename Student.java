@@ -31,15 +31,14 @@ public class Student extends Person {
         enrolledCourses.add(course);
         System.out.println("Student " + studentID + " successfully enrolled in " + course.getTitle());
     }
-    public String toString() {
-        return this.name;  // You can modify this to show more information if needed
-    }
+    
 
-    public void displayCourses() {
+    public List<Course> displayCourses() {
         System.out.println("Courses enrolled by " + name + ":");
         for (Course course : enrolledCourses) {
             System.out.println(course.getTitle() + " (" + course.getCredits() + " credits)");
         }
+        return enrolledCourses;
     }
         public String displayDetails() {
             StringBuilder courseNames = new StringBuilder();
@@ -57,6 +56,9 @@ public class Student extends Person {
     public boolean compare(Student obj) {
         Student student = (Student) obj;
         return studentID.equals(student.studentID) && name.equals(student.name) && address.equals(student.address) && dateOfBirth.equals(student.dateOfBirth) && email.equals(student.email);
+    }
+    public String toString() {
+        return this.name;  // You can modify this to show more information if needed
     }
 
 }
