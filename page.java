@@ -38,6 +38,8 @@ public class page {
         mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignCourseToTeacher", new String[]{"i.e, T001","i.e, C001"}), "AssignCourseToTeacher");
         mainPanel.add(createFormPanel(new String[]{"Student ID", "Student Name", "Email", "DOB", "Address"}, new String[]{"studentId", "string", "email", "dob", "alnum"}, "AddStudent", new String[]{"i.e, S001","i.e, Ali Hassan","i.e, example@gmail.com","i.e, 11-01-2000","i.e, 123 Main St"}), "AddStudent");
         mainPanel.add(createFormPanel(new String[]{"Student ID","Course ID", "Grade"}, new String[]{"studentId","courseId", "int"}, "AssignGradeToStudent", new String[]{"i.e, S001","i.e, C001","i.e, 90"}), "AssignGradeToStudent");
+        mainPanel.add(createFormPanel(new String[]{"Student Name"}, new String[]{"string"}, "SearchStudentByName", new String[]{"i.e, Ali Hassan"}), "SearchStudentByName");
+        mainPanel.add(createFormPanel(new String[]{"Course Credits"}, new String[]{"int"}, "SearchCourseByCredits", new String[]{"i.e, 4"}), "SearchCourseByCredits");
         mainPanel.add(createReportPanel(), "GenerateReport");
         frame.add(mainPanel, BorderLayout.CENTER);
 
@@ -185,6 +187,34 @@ public class page {
                         }
                     }
                     
+                    // else if (func.equals("SearchStudentByName")) {
+                        // String studentName = textFields[0].getText().replace(" ", "_");
+                        // java.util.List<String> students = university.searchStudentByName(studentName);
+                        // if (students.isEmpty()) {
+                            // JOptionPane.showMessageDialog(frame, "No students found with the name " + studentName, "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                        // } else {
+                        //     StringBuilder result = new StringBuilder("Students found:\n");
+                        //     for (String student : students) {
+                        //         result.append(student).append("\n");
+                        //     }
+                            // JOptionPane.showMessageDialog(frame, result.toString(), "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                        // }
+                    // }
+
+                    // else if (func.equals("SearchCourseByCredits")) {
+                        // int credits = Integer.parseInt(textFields[0].getText());
+                        // java.util.List<String> courses = university.searchCourseByCredits(credits);
+                        // if (courses.isEmpty()) {
+                        //     JOptionPane.showMessageDialog(frame, "No courses found with " + credits + " credits", "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                        // } else {
+                        //     StringBuilder result = new StringBuilder("Courses found:\n");
+                        //     for (String course : courses) {
+                        //         result.append(course).append("\n");
+                        //     }
+                        //     JOptionPane.showMessageDialog(frame, result.toString(), "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                        // }
+                    // }
+
                     //  else if (func.equals("AssignGradeToStudent")) {
                     //     university.assignGradeToStudent(textFields[0].getText(),textFields[1].getText(), Integer.parseInt(textFields[2].getText()));
                     // }
@@ -366,18 +396,21 @@ public class page {
         JMenuItem enrollStudentInCourse = new JMenuItem("Enroll Student in Course");
         JMenuItem removeStudentFromCourse = new JMenuItem("Remove Student from Course");
         JMenuItem calculateAverageGrade = new JMenuItem("Calculate Average Grade");
+        JMenuItem searchCourseByCredits = new JMenuItem("Search Course by Credits");
 
         addCourse.setFont(new Font("Arial", Font.PLAIN, 20)); 
         assignTeacherToCourse.setFont(new Font("Arial", Font.PLAIN, 20)); 
         enrollStudentInCourse.setFont(new Font("Arial", Font.PLAIN, 20)); 
         removeStudentFromCourse.setFont(new Font("Arial", Font.PLAIN, 20)); 
         calculateAverageGrade.setFont(new Font("Arial", Font.PLAIN, 20)); 
+        searchCourseByCredits.setFont(new Font("Arial", Font.PLAIN, 20));
 
         courseMenu.add(addCourse);
         courseMenu.add(assignTeacherToCourse);
         courseMenu.add(enrollStudentInCourse);
         courseMenu.add(removeStudentFromCourse);
         courseMenu.add(calculateAverageGrade);
+        courseMenu.add(searchCourseByCredits);
 
         JMenu teacherMenu = new JMenu("Teacher");
         teacherMenu.setFont(new Font("Arial", Font.PLAIN, 20)); 
@@ -394,12 +427,15 @@ public class page {
         studentMenu.setFont(new Font("Arial", Font.PLAIN, 20)); 
         JMenuItem addStudent = new JMenuItem("Add Student");
         JMenuItem assignGradeToStudent = new JMenuItem("Assign Grade to Student");
+        JMenuItem searchStudentByName = new JMenuItem("Search Student by Name");
 
         addStudent.setFont(new Font("Arial", Font.PLAIN, 20)); 
         assignGradeToStudent.setFont(new Font("Arial", Font.PLAIN, 20)); 
+        searchStudentByName.setFont(new Font("Arial", Font.PLAIN, 20));
 
         studentMenu.add(addStudent);
         studentMenu.add(assignGradeToStudent);
+        studentMenu.add(searchStudentByName);
 
         menuBar.add(courseMenu);
         menuBar.add(teacherMenu);
@@ -424,6 +460,8 @@ public class page {
         addStudent.addActionListener(_ -> showPanel("AddStudent", "Add Student"));
         assignGradeToStudent.addActionListener(_ -> showPanel("AssignGradeToStudent", "Assign Grade to Student"));
         addStaff.addActionListener(_ -> showPanel("GenerateReport", "Generate Report"));
+        searchStudentByName.addActionListener(_ -> showPanel("SearchStudentByName", "Search Student by Name"));
+        searchCourseByCredits.addActionListener(_ -> showPanel("SearchCourseByCredits", "Search Course by Credits"));
     }
 
     private void showPanel(String panelName, String labelText) {
