@@ -9,9 +9,6 @@ C1001 Math 3
 T1001 David @gmailc.com 1980-01-01 123 
 S1001 Alice abc@gmail.com 2000-01-01 123 
 S1002 Bob dsa 2000-01-02 456 
-<<<<<<< HEAD
-Grades: 60 -1 
-=======
 S1003 Charlie sdf 2000-01-03 789 
 S0001 dfddd A@gmail.com 11-03-2023 123 
 Grades: -1 -1 -1 -1 
@@ -66,5 +63,4 @@ C1221 Math 3
 null
 S1003 Charlie sdf 2000-01-03 789 
 Grades: -1 
->>>>>>> ba007fa1ed37b5d52f6eaa6903c88e635179118c
 
