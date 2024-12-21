@@ -29,7 +29,7 @@ public class page {
 
         frame.add(headerPanel, BorderLayout.NORTH);
 
-        mainPanel.add(createFormPanel(new String[]{"Course ID","Course Title",  "Course Credits"}, new String[]{"courseId","string", "int"},"AddCourse",new String[]{"i.e, C001","i.e, Maths","i.e, 3"}), "AddCourse");
+        mainPanel.add(createFormPanel(new String[]{"Course ID(C001)","Course Title",  "Course Credits"}, new String[]{"courseId","string", "int"},"AddCourse",new String[]{"i.e, C001","i.e, Maths","i.e, 3"}), "AddCourse");
         mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignTeacherToCourse", new String[]{"i.e, T001","i.e, C001"}), "AssignTeacherToCourse");
         mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "EnrollStudentInCourse", new String[]{"i.e, S001","i.e, C001"}), "EnrollStudentInCourse");
         mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "RemoveStudentFromCourse", new String[]{"i.e, S001","i.e, C001"}), "RemoveStudentFromCourse");
