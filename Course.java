@@ -146,5 +146,9 @@ public double calculateMedianGrade() {
 
         return str;
     }
+    //toString method
+    public String toString() {
+        return "Course ID: " + courseID + ", Title: " + title + ", Credits: " + credits;
+    }
     
 }

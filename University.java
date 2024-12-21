@@ -133,7 +133,7 @@ public class University {
         }
         return student.displayCourses();
     }
-    
+
     public List<Course> displayTeacherCourses(String teacherID) {
         Teacher teacher = searchTeacherByID(teacherID);
         if (teacher == null) {
@@ -142,7 +142,34 @@ public class University {
         return teacher.displayCourses();
     }
     
-    
+    // public String generateReport(List<Person> people) {
+        
+    // }
+    // generatereport func for following code
+    // public String generateReport(List<Person> people) {
+    //     StringBuilder report = new StringBuilder();
+    //     for (Person person : people) {
+    //         report.append(person.displayDetails()).append("\n");
+    //     }
+    //     report.append("Total number of people: ").append(people.size());
+    //     return report.toString();
+    // }
+    public String generateReport(List<Person> people) {
+        AdministrativeStaff admin = new AdministrativeStaff("","","","","","");
+        return admin.generateReport(people);
+    }
+    // public String generateReport(List<Person> people) {
+    //     StringBuilder report = new StringBuilder();
+    //     for (Person person : people) {
+    //         report.append(person.displayDetails()).append("\n");
+    //     }
+    //     report.append("Total number of people: ").append(people.size());
+    //     return report.toString();
+    // }
+
+    public String displaydetails(Course course) {
+        return course.displayDetails();
+    }
 
     public Teacher searchTeacherByID(String teacherID) {
         for (Teacher teacher : teachers.getAll()) {

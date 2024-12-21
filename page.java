@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class page {
     private JFrame frame;
@@ -320,24 +321,6 @@ public class page {
                             );
                         }
                     }
-                    // else if(func.equals("GenerateReport")){
-                    //     java.util.List<String> studentsReport = university.getStudentsReport();
-                    //     java.util.List<String> coursesReport = university.getCoursesReport();
-                    //     java.util.List<String> teachersReport = university.getTeachersReport();
-                    //     StringBuilder result = new StringBuilder("Students Report:\n");
-                    //     for (String student : studentsReport) {
-                    //         result.append(student).append("\n");
-                    //     }
-                    //     result.append("\nCourses Report:\n");
-                    //     for (String course : coursesReport) {
-                    //         result.append(course).append("\n");
-                    //     }
-                    //     result.append("\nTeachers Report:\n");
-                    //     for (String teacher : teachersReport) {
-                    //         result.append(teacher).append("\n");
-                    //     }
-                    //     JOptionPane.showMessageDialog(frame, result.toString(), "Report", JOptionPane.INFORMATION_MESSAGE);
-                    // }
                 university.saveData(null);
                 //empty the textfields
                 for (int i = 0; i < labels.length; i++) {
@@ -385,96 +368,84 @@ public class page {
         gbc.gridy = 2;
         panel.add(teachersReportButton, gbc);
 
-        // studentsReportButton.addActionListener(_ -> showStudentsReport());
-        // coursesReportButton.addActionListener(_ -> showCoursesReport());
-        // teachersReportButton.addActionListener(_ -> showTeachersReport());
+        studentsReportButton.addActionListener(_ -> showStudentsReport());
+        coursesReportButton.addActionListener(_ -> showCoursesReport());
+        teachersReportButton.addActionListener(_ -> showTeachersReport());
 
         return panel;
     }
 
-    // private void showStudentsReport() {
-    //     JFrame reportFrame = new JFrame("Students Report");
-    //     reportFrame.setSize(400, 400);
-    //     reportFrame.setLocationRelativeTo(null);
-    //     reportFrame.setLayout(new BorderLayout());
+    private void showStudentsReport() {
+        // Retrieve the list of students
+        List<Student> students = university.getStudents();
+        StringBuilder result = new StringBuilder("Students Report:\n");
+        
+        // Build the report
+        for (Student student : students) {
+            result.append(student.displayDetails().replace("_", " ")).append("\n");
+        }
+        
+        // Create a JTextArea to display the report
+        JTextArea textArea = new JTextArea(20, 40); // 20 rows, 40 columns
+        textArea.setText(result.toString());
+        textArea.setEditable(false); // Make the JTextArea non-editable
+        
+        // Wrap the JTextArea in a JScrollPane to make it scrollable
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        
+        // Display the scrollable popup in a JOptionPane
+        JOptionPane.showMessageDialog(
+                frame, 
+                scrollPane, 
+                "Students Report", 
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
+    private void showTeachersReport() {
+        List<Teacher> teachers = university.getTeachers();
+        StringBuilder result = new StringBuilder("Teachers Report:\n");
+        
+        for (Teacher teacher : teachers) {
+            result.append(teacher.displayDetails().replace("_", " ")).append("\n");
+        }
+        
+        JTextArea textArea = new JTextArea(20, 40);
+        textArea.setText(result.toString());
+        textArea.setEditable(false);
+        
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        
+        JOptionPane.showMessageDialog(
+                frame, 
+                scrollPane, 
+                "Teachers Report", 
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
     
-    //     JLabel heading = new JLabel("Students Report", JLabel.CENTER);
-    //     heading.setFont(new Font("Arial", Font.BOLD, 24));
-    //     heading.setBorder(null); // Remove border
-    //     reportFrame.add(heading, BorderLayout.NORTH);
-    
-    //     JPanel reportPanel = new JPanel();
-    //     reportPanel.setBackground(Color.decode("#F0EBD8"));
-    //     reportPanel.setLayout(new BoxLayout(reportPanel, BoxLayout.Y_AXIS));
-    //     // Assuming university.getStudentsReport() returns a List<String> of student details
-    //     // for (String student : university.getStudentsReport()) {
-    //     //     JLabel studentLabel = new JLabel(student);
-    //     //     studentLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-    //     //     reportPanel.add(studentLabel);
-    //     // }
-    
-    //     JScrollPane scrollPane = new JScrollPane(reportPanel);
-    //     reportFrame.add(scrollPane, BorderLayout.CENTER);
-    
-    //     reportFrame.getContentPane().setBackground(Color.decode("#F0EBD8")); // Set background color
-    //     reportFrame.setVisible(true);
-    // }
-    
-    // private void showCoursesReport() {
-    //     JFrame reportFrame = new JFrame("Courses Report");
-    //     reportFrame.setSize(400, 400);
-    //     reportFrame.setLocationRelativeTo(null);
-    //     reportFrame.setLayout(new BorderLayout());
-    
-    //     JLabel heading = new JLabel("Courses Report", JLabel.CENTER);
-    //     heading.setFont(new Font("Arial", Font.BOLD, 24));
-    //     heading.setBorder(null); // Remove border
-    //     reportFrame.add(heading, BorderLayout.NORTH);
-    
-    //     JPanel reportPanel = new JPanel();
-    //     reportPanel.setBackground(Color.decode("#F0EBD8"));
-    //     reportPanel.setLayout(new BoxLayout(reportPanel, BoxLayout.Y_AXIS));
-    //     // Assuming university.getCoursesReport() returns a List<String> of course details
-    //     // for (String course : university.getCoursesReport()) {
-    //     //     JLabel courseLabel = new JLabel(course);
-    //     //     courseLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-    //     //     reportPanel.add(courseLabel);
-    //     // }
-    
-    //     JScrollPane scrollPane = new JScrollPane(reportPanel);
-    //     reportFrame.add(scrollPane, BorderLayout.CENTER);
-    
-    //     reportFrame.getContentPane().setBackground(Color.decode("#F0EBD8")); // Set background color
-    //     reportFrame.setVisible(true);
-    // }
-    
-    // private void showTeachersReport() {
-    //     JFrame reportFrame = new JFrame("Teachers Report");
-    //     reportFrame.setSize(400, 400);
-    //     reportFrame.setLocationRelativeTo(null);
-    //     reportFrame.setLayout(new BorderLayout());
-    
-    //     JLabel heading = new JLabel("Teachers Report", JLabel.CENTER);
-    //     heading.setFont(new Font("Arial", Font.BOLD, 24));
-    //     heading.setBorder(null); // Remove border
-    //     reportFrame.add(heading, BorderLayout.NORTH);
-    
-    //     JPanel reportPanel = new JPanel();
-    //     reportPanel.setBackground(Color.decode("#F0EBD8"));
-    //     reportPanel.setLayout(new BoxLayout(reportPanel, BoxLayout.Y_AXIS));
-    //     // Assuming university.getTeachersReport() returns a List<String> of teacher details
-    //     // for (String teacher : university.getTeachersReport()) {
-    //     //     JLabel teacherLabel = new JLabel(teacher);
-    //     //     teacherLabel.setFont(new Font("Arial", Font.PLAIN, 16));
-    //     //     reportPanel.add(teacherLabel);
-    //     // }
-    
-    //     // JScrollPane scrollPane = new JScrollPane(reportPanel);
-    //     // reportFrame.add(scrollPane, BorderLayout.CENTER);
-    
-    //     reportFrame.getContentPane().setBackground(Color.decode("#F0EBD8")); // Set background color
-    //     reportFrame.setVisible(true);
-    // }
+    private void showCoursesReport() {
+        List<Course> courses = university.getCourses();
+        StringBuilder result = new StringBuilder("Courses Report:\n");
+        
+        for (Course course : courses) {
+            result.append(course.toString().replace("_", " ")).append("\n");
+        }
+        
+        JTextArea textArea = new JTextArea(20, 40);
+        textArea.setText(result.toString());
+        textArea.setEditable(false);
+        
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        
+        JOptionPane.showMessageDialog(
+                frame, 
+                scrollPane, 
+                "Courses Report", 
+                JOptionPane.INFORMATION_MESSAGE
+        );
+    }
+
     
 
     private boolean validateInput(String input, String type) {
