@@ -29,14 +29,14 @@ public class page {
 
         frame.add(headerPanel, BorderLayout.NORTH);
 
-        mainPanel.add(createFormPanel(new String[]{"Course ID(C001)","Course Title",  "Course Credits"}, new String[]{"courseId","string", "int"},"AddCourse",new String[]{"i.e, C001","i.e, Maths","i.e, 3"}), "AddCourse");
+        mainPanel.add(createFormPanel(new String[]{"Course ID(C001)","Course Title",  "Course Credits"}, new String[]{"courseId","string", "int"},"AddCourse",new String[]{"i.e, C001","i.e, Data Structures","i.e, 4"}), "AddCourse");
         mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignTeacherToCourse", new String[]{"i.e, T001","i.e, C001"}), "AssignTeacherToCourse");
         mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "EnrollStudentInCourse", new String[]{"i.e, S001","i.e, C001"}), "EnrollStudentInCourse");
         mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "RemoveStudentFromCourse", new String[]{"i.e, S001","i.e, C001"}), "RemoveStudentFromCourse");
         mainPanel.add(createFormPanel(new String[]{"Course ID"}, new String[]{"courseId"}, "CalculateAverageGrade", new String[]{"i.e, C001"}), "CalculateAverageGrade");
-        mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Teacher Name", "Email", "DOB", "Specialization"}, new String[]{"teacherId", "string", "email", "dob", "string"}, "AddTeacher", new String[]{"i.e, T001","i.e, John","i.e, example@gmail.com","i.e, 01-01-1990","i.e, Mathematics"}), "AddTeacher");
+        mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Teacher Name", "Email", "DOB", "Specialization"}, new String[]{"teacherId", "string", "email", "dob", "string"}, "AddTeacher", new String[]{"i.e, T001","i.e, Ali Hassan","i.e, example@gmail.com","i.e, 01-01-1990","i.e, Data Structures"}), "AddTeacher");
         mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignCourseToTeacher", new String[]{"i.e, T001","i.e, C001"}), "AssignCourseToTeacher");
-        mainPanel.add(createFormPanel(new String[]{"Student ID", "Student Name", "Email", "DOB", "Address"}, new String[]{"studentId", "string", "email", "dob", "alnum"}, "AddStudent", new String[]{"i.e, S001","i.e, Jane","i.e, example@gmail.com","i.e, 11-01-2000","i.e, 123 Main St"}), "AddStudent");
+        mainPanel.add(createFormPanel(new String[]{"Student ID", "Student Name", "Email", "DOB", "Address"}, new String[]{"studentId", "string", "email", "dob", "alnum"}, "AddStudent", new String[]{"i.e, S001","i.e, Ali Hassan","i.e, example@gmail.com","i.e, 11-01-2000","i.e, 123 Main St"}), "AddStudent");
         mainPanel.add(createFormPanel(new String[]{"Student ID","Course ID", "Grade"}, new String[]{"studentId","courseId", "int"}, "AssignGradeToStudent", new String[]{"i.e, S001","i.e, C001","i.e, 90"}), "AssignGradeToStudent");
         mainPanel.add(createReportPanel(), "GenerateReport");
         frame.add(mainPanel, BorderLayout.CENTER);
@@ -119,6 +119,7 @@ public class page {
                         valid = false;
                         break;
                     }
+                    
                     if (!validateInput(input, types[i])) {
                         JOptionPane.showMessageDialog(frame, "Invalid input for " + labels[i], "Input Error", JOptionPane.ERROR_MESSAGE);
                         valid = false;
@@ -138,17 +139,17 @@ public class page {
                 if (valid) {
                     System.out.println(inputData.toString());
                     if (func.equals("AddCourse")) {
-                        int a = university.addCourse(new Course(textFields[0].getText(), textFields[1].getText(), Integer.parseInt(textFields[2].getText())));
+                        int a = university.addCourse(new Course(textFields[0].getText(), textFields[1].getText().replace(" ", "_"), Integer.parseInt(textFields[2].getText())));
                         if(a == -1){
                             JOptionPane.showMessageDialog(frame, "Course already exists", "Input Error", JOptionPane.ERROR_MESSAGE);
                         }
                     } else if (func.equals("AddTeacher")) {
-                        int a = university.addTeacher(new Teacher(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), textFields[3].getText(), textFields[4].getText()));
+                        int a = university.addTeacher(new Teacher(textFields[0].getText(), textFields[1].getText().replace(" ", "_"), textFields[2].getText(), textFields[3].getText(), textFields[4].getText().replace(" ", "_")));
                         if(a == -1){
                             JOptionPane.showMessageDialog(frame, "Teacher already exists", "Input Error", JOptionPane.ERROR_MESSAGE);
                         }
                     } else if (func.equals("AddStudent")) {
-                        int a = university.addStudent(new Student(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), textFields[3].getText(), textFields[4].getText()));
+                        int a = university.addStudent(new Student(textFields[0].getText(), textFields[1].getText().replace(" ", "_"), textFields[2].getText(), textFields[3].getText(), textFields[4].getText().replace(" ", "_")));
                         if(a == -1){
                             JOptionPane.showMessageDialog(frame, "Student already exists", "Input Error", JOptionPane.ERROR_MESSAGE);
                         }
@@ -330,6 +331,9 @@ public class page {
     
 
     private boolean validateInput(String input, String type) {
+        if (type.equals("string") || type.equals("alnum")) {
+            input = input.replace(" ", "_"); // Replace spaces with underscores for string and alnum only
+        }
         switch (type) {
             case "courseId":
                 return input.matches("^C\\d+");  
@@ -344,9 +348,9 @@ public class page {
             case "int":
                 return input.matches("\\d+"); 
             case "string":
-                return input.matches("[a-zA-Z ]+");
+                return input.matches("[a-zA-Z_]+");
             case "alnum":
-                return input.matches("[a-zA-Z0-9 ]+");
+                return input.matches("[a-zA-Z0-9_]+");
             default:
                 return false;
         }

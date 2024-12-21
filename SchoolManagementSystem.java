@@ -13,12 +13,14 @@ public class SchoolManagementSystem {
         // Teacher teacher2 = new Teacher("T1002", "Eve", "sdf", "1980-01-02", "456 Main St");
 
         // Course course1 = new Course("C1001", "Math", teacher1, 3);
-        // Course course2 = new Course("C1002", "Science", teacher2, 4);
-
+        String title ="Data Science";
+        title = title.replace(" ", "_");
+        Course course4 = new Course("C1464", title, 4);
+        university.addCourse(course4);
         
         // university.assignTeacherToCourse("T021", "C054");
         // university.enrollStudentInCourse("S1003", "C1002");
-        university.assignGradeToStudent("S1003", "C1001", 45);
+        // university.assignGradeToStudent("S1003", "C1001", 45);
         // university.addStudent(student3);
         // university.addStudent(student2);
         // university.addStudent(student1);
