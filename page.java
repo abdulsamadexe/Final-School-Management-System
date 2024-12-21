@@ -187,40 +187,74 @@ public class page {
                         }
                     }
                     
-                    // else if (func.equals("SearchStudentByName")) {
-                        // String studentName = textFields[0].getText().replace(" ", "_");
-                        // java.util.List<String> students = university.searchStudentByName(studentName);
-                        // if (students.isEmpty()) {
-                            // JOptionPane.showMessageDialog(frame, "No students found with the name " + studentName, "Search Result", JOptionPane.INFORMATION_MESSAGE);
-                        // } else {
-                        //     StringBuilder result = new StringBuilder("Students found:\n");
-                        //     for (String student : students) {
-                        //         result.append(student).append("\n");
-                        //     }
-                            // JOptionPane.showMessageDialog(frame, result.toString(), "Search Result", JOptionPane.INFORMATION_MESSAGE);
-                        // }
-                    // }
+                    else if (func.equals("SearchStudentByName")) { 
+                        String studentName = textFields[0].getText();  // Get the search term from the text field
+                        java.util.List<Student> students = university.searchStudentByName(studentName);
+                        
+                        if (students.isEmpty()) {
+                            JOptionPane.showMessageDialog(frame, "No students found with the name " + studentName, "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            StringBuilder result = new StringBuilder("Students found:\n");
+                            
+                            // Loop through each student and replace underscores with spaces before displaying
+                            for (Student student : students) {
+                                // Replace underscores with spaces only for displaying
+                                String displayName = student.toString().replace("_", " ");
+                                result.append(displayName).append("\n");
+                            }
+                            
+                            JOptionPane.showMessageDialog(frame, result.toString(), "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    
 
-                    // else if (func.equals("SearchCourseByCredits")) {
-                        // int credits = Integer.parseInt(textFields[0].getText());
-                        // java.util.List<String> courses = university.searchCourseByCredits(credits);
-                        // if (courses.isEmpty()) {
-                        //     JOptionPane.showMessageDialog(frame, "No courses found with " + credits + " credits", "Search Result", JOptionPane.INFORMATION_MESSAGE);
-                        // } else {
-                        //     StringBuilder result = new StringBuilder("Courses found:\n");
-                        //     for (String course : courses) {
-                        //         result.append(course).append("\n");
-                        //     }
-                        //     JOptionPane.showMessageDialog(frame, result.toString(), "Search Result", JOptionPane.INFORMATION_MESSAGE);
-                        // }
-                    // }
+                    else if (func.equals("SearchCourseByCredits")) {
+                        int credits = Integer.parseInt(textFields[0].getText());  // Parse the entered credits
+                        java.util.List<Course> courses = university.filterCoursesByCredits(credits);
+                        
+                        if (courses.isEmpty()) {
+                            JOptionPane.showMessageDialog(frame, "No courses found with " + credits + " credits", "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            StringBuilder result = new StringBuilder("Courses found:\n");
+                            
+                            // Loop through each course and replace underscores with spaces before displaying
+                            for (Course course : courses) {
+                                // Replace underscores with spaces for the course name in the display
+                                String displayName = course.toString().replace("_", " ");
+                                result.append(displayName).append("\n");
+                            }
+                            
+                            JOptionPane.showMessageDialog(frame, result.toString(), "Search Result", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
+                    
 
-                    //  else if (func.equals("AssignGradeToStudent")) {
-                    //     university.assignGradeToStudent(textFields[0].getText(),textFields[1].getText(), Integer.parseInt(textFields[2].getText()));
-                    // }
-                    // else if (func.equals("CalculateAverageGrade")) {
-                    //     university.calculateAverageGrade(textFields[0].getText());
-                    // }
+                     else if (func.equals("AssignGradeToStudent")) {
+                        int a = university.assignGradeToStudent(textFields[0].getText(),textFields[1].getText(), Integer.parseInt(textFields[2].getText()));
+                        if(a == -1){
+                            JOptionPane.showMessageDialog(frame, "Student or Course does not exist", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else if(a == 1){
+                            JOptionPane.showMessageDialog(frame, "Student is not enrolled in the course", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    
+                    
+                    }
+                    else if (func.equals("CalculateAverageGrade")) {
+                        double a = university.calculateAverageGrade(textFields[0].getText());
+                        if(a == -1){
+                            JOptionPane.showMessageDialog(frame, "Course does not exist", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else if(a == 1){
+                            JOptionPane.showMessageDialog(frame, "No students found in the course", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else if(a == 2){
+                            JOptionPane.showMessageDialog(frame, "No grades assigned to students", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(frame, "Average grade of the course is "+a, "Average Grade", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
                 university.saveData(null);
                 //empty the textfields
                 for (int i = 0; i < labels.length; i++) {

@@ -31,6 +31,9 @@ public class Student extends Person {
         enrolledCourses.add(course);
         System.out.println("Student " + studentID + " successfully enrolled in " + course.getTitle());
     }
+    public String toString() {
+        return this.name;  // You can modify this to show more information if needed
+    }
 
     public void displayCourses() {
         System.out.println("Courses enrolled by " + name + ":");

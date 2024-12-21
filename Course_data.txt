@@ -3,7 +3,7 @@ T1002 Eve sdf 1980-01-02 456
 S1001 Alice abc@gmail.com 2000-01-01 123 
 S1003 Charlie sdf 2000-01-03 789 
 S0001 dfddd A@gmail.com 11-03-2023 123 
-Grades: 60 -1 -1 
+Grades: 60 -1 40 
 
 C1001 Math 3
 T1001 David @gmailc.com 1980-01-01 123 
@@ -25,7 +25,7 @@ Grades:
 C99999 cccccccc 3
 null
 S99999 asdfd a@gmail.com 22-01-2000 asdf 
-Grades: -1 
+Grades: 50 
 
 C332 ddf 4
 null
@@ -58,4 +58,9 @@ Grades:
 C02456765 Data_Algos 3
 null
 Grades: 
+
+C1221 Math 3
+null
+S1003 Charlie sdf 2000-01-03 789 
+Grades: -1 
 

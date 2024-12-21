@@ -115,12 +115,17 @@ public class University {
     public List<Student> searchStudentByName(String name) {
         List<Student> result = new ArrayList<>();
         for (Student student : students.getAll()) {
-            if (student.getName().toLowerCase().contains(name.toLowerCase())) {
+            // Replace underscores with spaces in the student's name
+            String studentName = student.getName().replace("_", " ");
+            
+            // Check if the student's name (with spaces instead of underscores) contains the search term
+            if (studentName.toLowerCase().contains(name.toLowerCase())) {
                 result.add(student);
             }
         }
         return result;
     }
+    
 
     public Teacher searchTeacherByID(String teacherID) {
         for (Teacher teacher : teachers.getAll()) {
@@ -200,16 +205,35 @@ public class University {
         return 0; // Enrollment successful
         }
 
-        public void assignGradeToStudent(String studentID, String courseID, int grade) {
-        grade=(Integer)grade;
+        public int assignGradeToStudent(String studentID, String courseID, int grade) {
+        // Find the student and course by their IDs
         Student student = searchStudentByID(studentID);
         Course course = searchCourseByID(courseID);
-        if (student != null && course != null) {
-            course.assignGrade(student, grade);
-        }
-    }
 
-    public int removeStudentFromCourse(String studentID, String courseID) {
+        // Return -1 if either the student or course is not found
+        if (student == null || course == null) {
+            return -1; // Student or course does not exist
+        }
+
+        // Check if the student is enrolled in the course
+        boolean isEnrolled = false;
+        for (Student s : course.getEnrolledStudents()) {
+            if (s.getStudentID().equals(studentID)) {
+            isEnrolled = true;
+            break;
+            }
+        }
+
+        if (!isEnrolled) {
+            return 1; // Student not enrolled in the course
+        }
+
+        // Assign the grade to the student
+        course.assignGrade(student, grade);
+        return 0; // Grade assignment successful
+        }
+
+        public int removeStudentFromCourse(String studentID, String courseID) {
         // Find the student and course by their IDs
         Student student = searchStudentByID(studentID);
         Course course = searchCourseByID(courseID);
@@ -235,6 +259,39 @@ public class University {
         // Remove the student from the course
         course.removeStudent(student); // Assuming removeStudent handles the removal
         return 0; // Removal successful
+    }
+
+    //calculate the average grade of a course
+    public double calculateAverageGrade(String courseID) {
+        Course course = searchCourseByID(courseID);
+        if(course==null){
+            return -1;
+        } // Return -1 if the course is not found
+        List<Student> students = course.getEnrolledStudents();
+        List<Integer> grades = course.getGrades();
+        double total = 0;
+        int count = 0; 
+        
+        if(students.size()==0){
+            return 1;
+        } // Return 1 if no students are enrolled in the course
+       
+        int a = -1;
+        for (int i = 0; i < students.size(); i++) {
+            if (grades.get(i) != -1) {
+                a = 0;
+            }
+            if(a != 0) {
+                return 2;
+            }
+        }
+        for (int i = 0; i < students.size(); i++) {
+            if (grades.get(i) != -1) {
+                total += grades.get(i);
+                count++;
+            }
+        }
+        return total / count;
     }
 
     public List<Course> filterCoursesByTeacher(String teacherID) {
