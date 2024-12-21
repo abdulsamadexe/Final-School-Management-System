@@ -114,8 +114,8 @@ public class page {
                 StringBuilder inputData = new StringBuilder();
                 for (int i = 0; i < labels.length; i++) {
                     String input = textFields[i].getText().trim();
-                    if (input.isEmpty()) {
-                        JOptionPane.showMessageDialog(frame, labels[i] + " cannot be empty", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    if (input.isEmpty() || input.equals(format[i])) { // Check for placeholder
+                        JOptionPane.showMessageDialog(frame, labels[i] + " cannot be empty. Please type according to the format shown", "Input Error", JOptionPane.ERROR_MESSAGE);
                         valid = false;
                         break;
                     }
@@ -193,7 +193,8 @@ public class page {
                 university.saveData(null);
                 //empty the textfields
                 for (int i = 0; i < labels.length; i++) {
-                    textFields[i].setText("");
+                    textFields[i].setText(format[i]); // Set default placeholder text
+                    textFields[i].setForeground(Color.GRAY); // Ensure placeholder text is shown in gray
                 }
                 
             }
