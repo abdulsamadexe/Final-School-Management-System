@@ -105,6 +105,22 @@ public class Course {
         }
         return sum / count;
     }
+    //Use wrapper classes for processing numeric data,calculateMedianGrade(): Calculates and returns the median grade for students in a
+// course.
+public double calculateMedianGrade() {
+    List<Integer> sortedGrades = new ArrayList<>(grades);
+    Collections.sort(sortedGrades);
+    int size = sortedGrades.size();
+
+    if (size % 2 == 0) {
+        // For even-sized list, return the average of the two middle numbers (ensure floating-point division)
+        return (sortedGrades.get(size / 2 - 1) + sortedGrades.get(size / 2)) / 2.0;
+    } else {
+        // For odd-sized list, return the middle element
+        return sortedGrades.get(size / 2);
+    }
+}
+
     //toString method
     public String displayDetails()
      {
