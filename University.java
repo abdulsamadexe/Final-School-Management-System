@@ -293,6 +293,35 @@ public class University {
         }
         return total / count;
     }
+    //calculate the median grade of a course
+    // when in course we have public double calculateMedianGrade() {
+    //     List<Integer> gradesCopy = new ArrayList<>(grades);
+    //     gradesCopy.removeIf(grade -> grade == -1);
+    //     Collections.sort(gradesCopy);
+    //     int size = gradesCopy.size();
+    //     if (size % 2 == 0) {
+    //         return (gradesCopy.get(size / 2 - 1) + gradesCopy.get(size / 2)) / 2.0;
+    //     } else {
+    //         return gradesCopy.get(size / 2);
+    //     }
+    // }
+    public double calculateMedianGrade(String courseID) {
+        Course course = searchCourseByID(courseID);
+        if(course==null){
+            return -1;
+        } // Return -1 if the course is not found
+        List<Student> students = course.getEnrolledStudents();
+        List<Integer> grades = course.getGrades();
+        List<Integer> gradesCopy = new ArrayList<>(grades);
+        gradesCopy.removeIf(grade -> grade == -1);
+        Collections.sort(gradesCopy);
+        int size = gradesCopy.size();
+        if (size % 2 == 0) {
+            return (gradesCopy.get(size / 2 - 1) + gradesCopy.get(size / 2)) / 2.0;
+        } else {
+            return gradesCopy.get(size / 2);
+        }
+    }
 
     public List<Course> filterCoursesByTeacher(String teacherID) {
         List<Course> result = new ArrayList<>();
