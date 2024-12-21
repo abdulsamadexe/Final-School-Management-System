@@ -84,14 +84,15 @@ public class Course {
 
     
     public void assignGrade(Student s, Integer grade) {
-        for (int i = 0; i < enrolledStudents.size(); i++) {
-            if (enrolledStudents.get(i).getStudentID().equals(s.getStudentID())) {
-                grades.set(i, grade);
-                System.out.println("Grade " + grade + " assigned to " + s.getStudentID() + " in " + title);
-                return;
-            }
+    for (int i = 0; i < enrolledStudents.size(); i++) {
+        if (enrolledStudents.get(i).getStudentID().equals(s.getStudentID())) {
+            grades.set(i, grade);
+            System.out.println("Grade " + grade + " assigned to " + s.getStudentID() + " in " + title);
+            return;
         }
     }
+}
+
 
     public double calculateAverageGrade() {
         double sum = 0;
@@ -103,6 +104,10 @@ public class Course {
             }
         }
         return sum / count;
+    }
+    //toString method
+    public String toString() {
+        return title;  // You can modify this to show more information if needed
     }
     
 }

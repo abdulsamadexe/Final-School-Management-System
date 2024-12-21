@@ -1,4 +1,7 @@
 S1003 Charlie sdf 2000-01-03 789 
+C1001 Math 3 
+C13454 java 3 
+C1221 Math 3 
 
 S1002 Bob dsa 2000-01-02 456 
 C1001 Math 3 
@@ -6,4 +9,13 @@ C1001 Math 3
 S1001 Alice abc@gmail.com 2000-01-01 123 
 C1001 Math 3 
 C1002 Science 4 
+
+S99999 asdfd a@gmail.com 22-01-2000 asdf 
+C99999 cccccccc 3 
+
+S0001 dfddd A@gmail.com 11-03-2023 123 
+C1001 Math 3 
+C1002 Science 4 
+
+S358 Charlie_xavier a@gmail.com 11-03-2000 123_main_st 
 
