@@ -34,6 +34,7 @@ public class page {
         mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "EnrollStudentInCourse", new String[]{"i.e, S001","i.e, C001"}), "EnrollStudentInCourse");
         mainPanel.add(createFormPanel(new String[]{"Student ID", "Course ID"}, new String[]{"studentId", "courseId"}, "RemoveStudentFromCourse", new String[]{"i.e, S001","i.e, C001"}), "RemoveStudentFromCourse");
         mainPanel.add(createFormPanel(new String[]{"Course ID"}, new String[]{"courseId"}, "CalculateAverageGrade", new String[]{"i.e, C001"}), "CalculateAverageGrade");
+        mainPanel.add(createFormPanel(new String[]{"Course ID"}, new String[]{"courseId"}, "CalculateMedianGrade", new String[]{"i.e, C001"}), "CalculateMedianGrade");
         mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Teacher Name", "Email", "DOB", "Specialization"}, new String[]{"teacherId", "string", "email", "dob", "string"}, "AddTeacher", new String[]{"i.e, T001","i.e, Ali Hassan","i.e, example@gmail.com","i.e, 01-01-1990","i.e, Data Structures"}), "AddTeacher");
         mainPanel.add(createFormPanel(new String[]{"Teacher ID", "Course ID"}, new String[]{"teacherId", "courseId"}, "AssignCourseToTeacher", new String[]{"i.e, T001","i.e, C001"}), "AssignCourseToTeacher");
         mainPanel.add(createFormPanel(new String[]{"Student ID", "Student Name", "Email", "DOB", "Address"}, new String[]{"studentId", "string", "email", "dob", "alnum"}, "AddStudent", new String[]{"i.e, S001","i.e, Ali Hassan","i.e, example@gmail.com","i.e, 11-01-2000","i.e, 123 Main St"}), "AddStudent");
@@ -255,6 +256,21 @@ public class page {
                             JOptionPane.showMessageDialog(frame, "Average grade of the course is "+a, "Average Grade", JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
+                    else if (func.equals("CalculateMedianGrade")) {
+                        double a = university.calculateMedianGrade(textFields[0].getText());
+                        if(a == -1){
+                            JOptionPane.showMessageDialog(frame, "Course does not exist", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else if(a == 1){
+                            JOptionPane.showMessageDialog(frame, "No students found in the course", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else if(a == 2){
+                            JOptionPane.showMessageDialog(frame, "No grades assigned to students", "Input Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(frame, "Median of grade course is " + a, "Median Grade", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    }
                 university.saveData(null);
                 //empty the textfields
                 for (int i = 0; i < labels.length; i++) {
@@ -430,6 +446,7 @@ public class page {
         JMenuItem enrollStudentInCourse = new JMenuItem("Enroll Student in Course");
         JMenuItem removeStudentFromCourse = new JMenuItem("Remove Student from Course");
         JMenuItem calculateAverageGrade = new JMenuItem("Calculate Average Grade");
+        JMenuItem calculateMedianGrade = new JMenuItem("Calculate Median Grade");
         JMenuItem searchCourseByCredits = new JMenuItem("Search Course by Credits");
 
         addCourse.setFont(new Font("Arial", Font.PLAIN, 20)); 
@@ -437,6 +454,7 @@ public class page {
         enrollStudentInCourse.setFont(new Font("Arial", Font.PLAIN, 20)); 
         removeStudentFromCourse.setFont(new Font("Arial", Font.PLAIN, 20)); 
         calculateAverageGrade.setFont(new Font("Arial", Font.PLAIN, 20)); 
+        calculateMedianGrade.setFont(new Font("Arial", Font.PLAIN, 20)); 
         searchCourseByCredits.setFont(new Font("Arial", Font.PLAIN, 20));
 
         courseMenu.add(addCourse);
@@ -444,6 +462,7 @@ public class page {
         courseMenu.add(enrollStudentInCourse);
         courseMenu.add(removeStudentFromCourse);
         courseMenu.add(calculateAverageGrade);
+        courseMenu.add(calculateMedianGrade);
         courseMenu.add(searchCourseByCredits);
 
         JMenu teacherMenu = new JMenu("Teacher");
@@ -489,6 +508,7 @@ public class page {
         enrollStudentInCourse.addActionListener(_ -> showPanel("EnrollStudentInCourse", "Enroll Student in Course"));
         removeStudentFromCourse.addActionListener(_ -> showPanel("RemoveStudentFromCourse", "Remove Student from Course"));
         calculateAverageGrade.addActionListener(_ -> showPanel("CalculateAverageGrade", "Calculate Average Grade"));
+        calculateMedianGrade.addActionListener(_ -> showPanel("CalculateMedianGrade", "Calculate Median Grade"));
         addTeacher.addActionListener(_ -> showPanel("AddTeacher", "Add Teacher"));
         assignCourseToTeacher.addActionListener(_ -> showPanel("AssignCourseToTeacher", "Assign Course to Teacher"));
         addStudent.addActionListener(_ -> showPanel("AddStudent", "Add Student"));
@@ -496,6 +516,7 @@ public class page {
         addStaff.addActionListener(_ -> showPanel("GenerateReport", "Generate Report"));
         searchStudentByName.addActionListener(_ -> showPanel("SearchStudentByName", "Search Student by Name"));
         searchCourseByCredits.addActionListener(_ -> showPanel("SearchCourseByCredits", "Search Course by Credits"));
+        
     }
 
     private void showPanel(String panelName, String labelText) {

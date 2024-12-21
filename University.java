@@ -269,8 +269,6 @@ public class University {
         } // Return -1 if the course is not found
         List<Student> students = course.getEnrolledStudents();
         List<Integer> grades = course.getGrades();
-        double total = 0;
-        int count = 0; 
         
         if(students.size()==0){
             return 1;
@@ -285,26 +283,15 @@ public class University {
                 return 2;
             }
         }
-        for (int i = 0; i < students.size(); i++) {
-            if (grades.get(i) != -1) {
-                total += grades.get(i);
-                count++;
-            }
-        }
-        return total / count;
+        // for (int i = 0; i < students.size(); i++) {
+        //     if (grades.get(i) != -1) {
+        //         total += grades.get(i);
+        //         count++;
+        //     }
+        // }
+        // return total / count;
+        return course.calculateAverageGrade();
     }
-    //calculate the median grade of a course
-    // when in course we have public double calculateMedianGrade() {
-    //     List<Integer> gradesCopy = new ArrayList<>(grades);
-    //     gradesCopy.removeIf(grade -> grade == -1);
-    //     Collections.sort(gradesCopy);
-    //     int size = gradesCopy.size();
-    //     if (size % 2 == 0) {
-    //         return (gradesCopy.get(size / 2 - 1) + gradesCopy.get(size / 2)) / 2.0;
-    //     } else {
-    //         return gradesCopy.get(size / 2);
-    //     }
-    // }
     public double calculateMedianGrade(String courseID) {
         Course course = searchCourseByID(courseID);
         if(course==null){
@@ -312,16 +299,36 @@ public class University {
         } // Return -1 if the course is not found
         List<Student> students = course.getEnrolledStudents();
         List<Integer> grades = course.getGrades();
-        List<Integer> gradesCopy = new ArrayList<>(grades);
-        gradesCopy.removeIf(grade -> grade == -1);
-        Collections.sort(gradesCopy);
-        int size = gradesCopy.size();
-        if (size % 2 == 0) {
-            return (gradesCopy.get(size / 2 - 1) + gradesCopy.get(size / 2)) / 2.0;
-        } else {
-            return gradesCopy.get(size / 2);
+        
+        if(students.size()==0){
+            return 1;
+        } // Return 1 if no students are enrolled in the course
+       
+        int a = -1;
+        for (int i = 0; i < students.size(); i++) {
+            if (grades.get(i) != -1) {
+                a = 0;
+            }
+            if(a != 0) {
+                return 2;
+            }
         }
+    
+        // Sort the valid grades
+        // Collections.sort(validGrades);
+        // int size = validGrades.size();
+    
+        // // Calculate the median
+        // if (size % 2 == 0) {
+        //     // If the number of valid grades is even, return the average of the two middle values
+        //     return (validGrades.get(size / 2 - 1) + validGrades.get(size / 2)) / 2.0;
+        // } else {
+        //     // If the number of valid grades is odd, return the middle value
+        //     return validGrades.get(size / 2);
+        // }
+        return course.calculateMedianGrade();
     }
+    
 
     public List<Course> filterCoursesByTeacher(String teacherID) {
         List<Course> result = new ArrayList<>();
